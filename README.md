@@ -5,5 +5,13 @@
 jdk版本为1.8
 maven版本3.3.9
 tomcat版本为tomcat9
-开发工具为idea，datagrip，neovim，apifox
-办公软件wps，wechat，wxwork
+java开发工具为：idea
+数据库连接工具：datagrip
+接口api：apifox
+ssh客户端：electerm
+redis客户端：tiny rdm
+会议软件：wemeet，jisti meet
+office软件：wps
+聊天：wechat，wxwork(企业微信请自行安装，安装后续配置在bottles备注)
+邮件客户端：thunderbird
+window软件安装：bottles

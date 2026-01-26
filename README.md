@@ -22,15 +22,15 @@ java开发工具为：idea
 
 接口api：apifox
 
-ssh客户端：electerm
+ssh客户端：electerm，finalshell
 
-redis客户端：tiny rdm
+redis客户端：tiny rdm, another redis desktop manager
 
 会议软件：wemeet，jisti meet
 
 office软件：wps
 
-聊天：wechat（微信安装报错就自行下载安装包并添加入缓存，具体操作看文件里的备注），wxwork(企业微信请自行安装，安装后续配置在bottles备注)
+聊天：wechat，wxwork(企业微信请自行安装，安装后续配置在bottles备注)
 
 邮件客户端：thunderbird
 

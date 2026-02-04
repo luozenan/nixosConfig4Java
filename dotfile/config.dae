@@ -1,0 +1,141 @@
+########################
+# 全局配置
+########################
+global {
+    # 日志
+    log_level: info
+
+    ########################
+    # 网络接口
+    ########################
+   # lan_interface: wlps20
+    wan_interface: auto
+    auto_config_kernel_parameter: true
+
+    ########################
+    # 连接策略（非常关键）
+    ########################
+    # 国内用户必须用 domain++
+    dial_mode: domain++
+    sniffing_timeout: 0
+
+    ########################
+    # 节点健康检查（只测“能否出国”）
+    ########################
+    tcp_check_url: "https://www.cloudflare.com/cdn-cgi/trace"
+    tcp_check_http_method: GET
+
+    check_interval: 90s
+    check_tolerance: 300ms
+}
+
+########################
+# 订阅
+########################
+subscription {
+    airport: "你的订阅链接"
+}
+
+########################
+# DNS（防污染）
+########################
+dns {
+    ipversion_prefer: 4
+
+    upstream {
+        alidns: 'tcp+udp://dns.alidns.com:53'
+        googledns: 'tcp+udp://dns.google:53'
+    }
+
+    routing {
+       request {
+          qtype(https) -> reject
+          fallback: alidns
+       }
+       response {
+         upstream(googledns) -> accept
+         ip(geoip:private) && !qname(geosite:cn) -> googledns
+         fallback: accept
+       }
+  }}
+
+########################
+# 节点分组
+########################
+group {
+
+    # 主代理组（自动）
+    proxy {
+        policy: min_moving_avg
+        tcp_check_url: "https://www.cloudflare.com/cdn-cgi/trace"
+    }
+
+    # 稳定组（IEPL / 专线）
+    stable {
+        filter: name(keyword: IEPL)
+        policy: fixed(0)
+    }
+
+    # AI 专用（示例：新加坡）
+    ai {
+        filter: name(keyword: HK, keyword: SG)
+        policy: min_moving_avg
+    }
+}
+
+########################
+# 路由规则
+########################
+routing {
+
+    ########################
+    # 系统组件直连（防环路）
+    ########################
+    pname(NetworkManager, dnsmasq, systemd-resolved) -> must_direct
+
+    ########################
+    # 本地 / 私有 / 多播
+    ########################
+    dip(geoip:private) -> direct
+    dip(224.0.0.0/3, 'ff00::/8') -> direct
+
+    ########################
+    # DNS 本身必须直连
+    ########################
+    dip(223.5.5.5, 119.29.29.29) -> must_direct
+    domain(dns.alidns.com, doh.pub) -> must_direct
+
+    ########################
+    # 国内直连
+    ########################
+    domain(geosite:cn) -> direct
+    dip(geoip:cn) -> direct
+
+    ########################
+    # GitHub / CDN 稳定
+    ########################
+    domain(suffix:github.com) -> stable
+    domain(suffix:githubusercontent.com) -> stable
+    domain(suffix:githubassets.com) -> stable
+    domain(suffix:jsdelivr.net) -> stable
+
+    ########################
+    # AI 服务
+    ########################
+    domain(suffix:openai.com) -> ai
+    domain(suffix:claude.ai) -> ai
+
+    ########################
+    # QUIC 策略（核心）
+    ########################
+    # UDP 443 不进代理：
+    # 国内 = HTTP/3
+    # 国外 = 自动回退 TCP
+    l4proto(udp) && dport(443) -> direct
+
+    ########################
+    # 最终兜底
+    ########################
+    fallback: proxy
+}
+

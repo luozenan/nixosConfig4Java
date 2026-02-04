@@ -45,10 +45,10 @@ services.mysql = {
  #environment.variables._JAVA_AWT_WM_NONREPARENTING = "1";
  environment.etc = {
   "jdk8" = {
-    source = "${pkgs.jdk8}"; # 固定指向 nixpkgs 中的 jdk8 包
+    source = "${pkgs.javaPackages.compiler.openjdk8-bootstrap}"; # 固定指向 nixpkgs 中的 jdk8 包
   };
   "maven" = {
-	source = "${pkgs.maven}";
+	source = "${customMaven}";
   };
 };
 environment.variables = {

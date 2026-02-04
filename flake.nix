@@ -25,6 +25,7 @@
     url = "github:luozenan/nixos-finalshell";
     inputs.nixpkgs.follows = "nixpkgs";
   }; 
+
 };
  
   outputs = inputs@{ self, nixpkgs, home-manager, nixvim, ... }: 

@@ -12,12 +12,13 @@
      #社交 https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_x86_64.AppImage
      # nix store add-file 
      # wechat
-      (pkgs.wechat.overrideAttrs (oldAttrs: {
-      src = fetchurl {
+     qq
+     (pkgs.wechat.overrideAttrs (oldAttrs: {
+        src = fetchurl {
           url = "https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_x86_64.AppImage";
           hash = "sha256-+r5Ebu40GVGG2m2lmCFQ/JkiDsN/u7XEtnLrB98602w=";
         };
-    }))
+     }))
      thunderbird
      # 远程
      parsec-bin
@@ -26,14 +27,20 @@
      #开发
      jetbrains.idea
      jetbrains.datagrip
+     vscode
      #vpn
      v2raya
      easytier
+     dae
      #redis client
      tiny-rdm
      #会议软件
      wemeet
      jitsi-meet-electron
+     #壁纸
+     #音乐
+     lx-music-desktop
+    # qqmusic
   ]);
 
 
@@ -48,6 +55,10 @@ services.sunshine = {
  services.easytier = {
     enable = true;
     instances."nixos".configFile = "/home/luozenan/easytier.toml";
+ };
+ services.dae = {
+    enable = true;
+    configFile = "/home/luozenan/.config/dae/config.dae";
  };
 }
 

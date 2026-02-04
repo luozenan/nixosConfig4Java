@@ -15,15 +15,42 @@ in
   programs.java.enable = true;
  
   environment.systemPackages = with pkgs; [
+    #java
     tomcat9
     tomcat_mysql_jdbc
     customMaven
     #jdk8_headless
     javaPackages.compiler.openjdk8-bootstrap
- ];
+    #python
+    (python3.withPackages (python-pkgs: with python-pkgs; [
+      pandas
+      requests
+      pygobject3
+    ]))
+    #rust
+    rustup
+    rust-analyzer
+    #C
+    gcc
+    #database
+    mariadb
+    mycli
+];
+services.mysql = {
+  enable = true;
+  package = pkgs.mariadb;
+};
 # environment.variables._JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
  
  #environment.variables._JAVA_AWT_WM_NONREPARENTING = "1";
+ environment.etc = {
+  "jdk8" = {
+    source = "${pkgs.jdk8}"; # 固定指向 nixpkgs 中的 jdk8 包
+  };
+  "maven" = {
+	source = "${pkgs.maven}";
+  };
+};
 environment.variables = {
     # 默认JDK 8路径（自动匹配nix/store中的openjdk8）
     JAVA_HOME = "${pkgs.javaPackages.compiler.openjdk8-bootstrap}";

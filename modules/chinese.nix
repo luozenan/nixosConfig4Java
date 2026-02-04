@@ -37,8 +37,16 @@ environment.sessionVariables = {
     SDL_IM_MODULE = "fcitx";
     GLFW_IM_MODULE = "fcitx";
     INPUT_METHOD = "fcitx";
-    XMODIFIERS="@im=fcitx";
-  };
+    XMODIFIERS = "@im=fcitx";
+};
+environment.variables = {
+  QT_QPA_PLATFORM = "xcb";
+  QT_FONT_DPI = "96";
+  QT_SCALE_FACTOR = "1";
+  QT_SELECTION_BACKEND = "primary";
+  # 设置QT默认中文字体
+  QT_DEFAULT_FONT = "Noto Sans CJK SC";
+};
   # 中文字体优化
   fonts = {
   packages = with pkgs; [
@@ -47,6 +55,7 @@ environment.sessionVariables = {
     noto-fonts-cjk-serif   # 思源宋体 (衬线)
     ];
   fontconfig = {
+    useEmbeddedBitmaps = true;
     defaultFonts = {
       sansSerif = [ "Noto Sans CJK SC" ];
       serif = [ "Noto Serif CJK SC" ];

@@ -6,7 +6,6 @@
 {
   environment.systemPackages = with pkgs; [ 
     steam-run
-    lx-music-desktop
   ];
 
   programs.steam = {

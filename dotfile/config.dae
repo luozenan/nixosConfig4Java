@@ -114,6 +114,7 @@ routing {
     ########################
     # GitHub / CDN 稳定
     ########################
+    domain(suffix: github.com) && dport(22) -> direct
     domain(suffix:github.com) -> stable
     domain(suffix:githubusercontent.com) -> stable
     domain(suffix:githubassets.com) -> stable

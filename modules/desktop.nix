@@ -2,7 +2,7 @@
 
   programs.xwayland.enable = true;
   services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = true;
+  #services.displayManager.gdm.wayland = true;
   security.polkit.enable = true; # polkit
   #services.xserver.enable = true;
 

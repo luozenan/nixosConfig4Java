@@ -36,6 +36,7 @@
     XCURSOR_PATH = "$HOME/.icons:${pkgs.bibata-cursors}/share/icons:$XCURSOR_PATH";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
     #ANTHROPIC_API_KEY = "sk-ant-sid02-SsYGCCtmQ5qz7uqbx4jH8A-L7xCIEghX8iSw3cXoAcBF";
+    STARSHIP_CONFIG = "${config.home.homeDirectory}/.config/starship.toml";
   };
 
   dconf.settings = {

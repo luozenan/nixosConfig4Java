@@ -21,7 +21,15 @@
      #}))
      thunderbird
      # 远程
-     parsec-bin
+     #parsec-bin
+     (pkgs.parsec-bin.overrideAttrs (old: {
+      src = fetchurl {
+        url = "https://builds.parsec.app/package/parsec-linux.deb";
+        # You'll need to update this hash — get it by running:
+        # nix-prefetch-url https://builds.parsec.app/package/parsec-linux.deb
+        sha256 = "sha256-8Wkbo6l1NGBPX2QMJszq+u9nLM96tu7WYRTQq6/CzM8="; # replace after running the prefetch
+      };
+    }))
      #sunshine
      #moonlight
      #开发

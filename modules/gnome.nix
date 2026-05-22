@@ -49,9 +49,9 @@ in
     app-menu-is-back
     forge
     gsconnect
-    rdp-and-ssh-connect
+    #rdp-and-ssh-connect
     logo-menu
-    toggle-proxy
+   # toggle-proxy
     rounded-window-corners-reborn
     desktop-icons-ng-ding
     astra-monitor

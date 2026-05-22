@@ -22,18 +22,16 @@ java开发工具为：idea ，vscode
 
 接口api：apifox
 
-ssh客户端：electerm，finalshell
+ssh客户端：electerm
 
-redis客户端：tiny rdm, another redis desktop manager
+redis客户端：tiny rdm
 
-会议软件：wemeet（不好用，等原生的吧），jisti meet
+会议软件：wemeet（不好用，等原生的吧）
 
-office软件：wps
+office软件：onlyoffice
 
-聊天：wechat，qq，wxwork(企业微信请自行安装，安装后续配置在bottles备注)
+聊天：wechat，qq，玲珑版wxwork
 
 邮件客户端：thunderbird
 
-window软件安装：bottles
-
-vpn: dae, v2raya
+vpn: dae
